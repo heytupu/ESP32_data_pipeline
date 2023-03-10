@@ -280,8 +280,9 @@ if __name__ == "__main__":
         time.sleep(TIME_INTERVAL)
         
         # if (time.time() - starting_time) > (7 * 24 * 60 * 60):
-        if (time.time() - starting_time) > (3 * 60):
-            ugit.update()
+        if (time.time() - starting_time) > (30):
+            machine.reset()
+            #ugit.update()
 
 # Firmware Notes:
 """
@@ -289,3 +290,4 @@ if __name__ == "__main__":
 this pin. It makes it impossible to start the program. You can't even cancel it
 with Ctrl. "C". 
 """
+
