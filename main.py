@@ -76,8 +76,11 @@ def message_callback(topic: str, message: str) -> None:
     print(json.loads(message))
 
 
-def connect_iot_core() -> MQTTClient:
+def connect_iot_core(val = 0) -> MQTTClient:
     """Establish a connection AWS Iot Core MQTT broker."""
+    if val >= 5:
+        raise Exception(f"Unable to connect to MQTT broker after {val} attempts. {e}")
+    
     mqtt = MQTTClient(
         THING_NAME,
         ENDPOINT,
@@ -91,7 +94,10 @@ def connect_iot_core() -> MQTTClient:
         mqtt.set_callback(message_callback)
         print(f"Established connection to MQTT broker at {ENDPOINT}.")
     except Exception as e:
-        raise Exception(f"Unable to connect to MQTT broker. {e}")
+        #raise Exception(f"Unable to connect to MQTT broker. {e}")
+        print(f"Unable to connect to MQTT broker. {e}")
+        time.sleep(3)
+        mqtt = connect_iot_core()
 
     return mqtt
 
@@ -290,4 +296,5 @@ if __name__ == "__main__":
 this pin. It makes it impossible to start the program. You can't even cancel it
 with Ctrl. "C". 
 """
+
 

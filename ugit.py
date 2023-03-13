@@ -36,9 +36,9 @@ token = ""
 # Put the files you don't want deleted or updated here use '/filename.ext'
 
 # We could put this in our config file.
-ignore_files = ['/ugit.py', "/boot.py", "/cert/AmazonRootCA1.pem",
-                "/cert/certificate.pem.crt", "/cert/private.pem.key",
-                "/configs/config.json", "/scd30.py"]
+ignore_files = ['ugit.py', "boot.py", "cert/AmazonRootCA1.pem",
+                "cert/certificate.pem.crt", "cert/private.pem.key",
+                "configs/config.json", "scd30.py", "get_device_id.py"]
 ignore = ignore_files
 ### -----------END OF USER VARIABLES ----------####
 
@@ -99,12 +99,14 @@ def pull_all(tree=call_trees_url, raw = raw, ignore = ignore, isconnected=False)
         log.append(i['path'] + ' updated')
       except:
         log.append(i['path'] + ' failed to pull')
+        
   # delete files not in Github tree
-  if len(internal_tree) > 0:
-      print(internal_tree, ' leftover!')
-      for i in internal_tree:
-          os.remove(i)
-          log.append(i + ' removed from int mem')
+#   if len(internal_tree) > 0:
+#       print(internal_tree, ' leftover!')
+#       for i in internal_tree:
+#           os.remove(i)
+#           log.append(i + ' removed from int mem')
+          
   logfile = open('ugit_log.py','w')
   logfile.write(str(log))
   logfile.close()
@@ -242,3 +244,4 @@ def remove_item(item,tree):
 #     backup = open('ugit.backup','w')
 #     backup.write(backup_text)
 #     backup.close()
+
